@@ -81,10 +81,10 @@ def predict(data, model):
     tree = model.t
     f_value = 0
     while True:
-        if type(tree) == type({}):
+        if isinstance(tree, dict):
             if len(tree) == 1:
                 (key, value), = tree.items()
-                if type(value) == type({}):
+                if isinstance(value, dict):
                     tree = value
                     f_value = data[key]
                     data = np.concatenate((data[:key], data[key + 1:]))
@@ -93,7 +93,7 @@ def predict(data, model):
             else:
                 for k, v in tree.items():
                     if k == f_value:
-                        if type(v) == type({}):
+                        if isinstance(v, dict):
                             tree = v
                         else:
                             return v
